@@ -1,0 +1,152 @@
+body {
+  background-color: black;
+  color: white;
+
+}
+li {
+  list-style: none;
+}
+header {
+  display: flex;
+  justify-content: center;
+}
+header h1{
+  font-size: 100px;
+  text-align: center;
+  padding: 0px 500px 0px 500px;
+}
+header img {
+  height: 100px;
+}
+header button {
+  background-color: black;
+  width: 100px;
+  height: 50px;
+  width: 150px;
+  font-size: 30px;
+  color: white;
+  border: 5px solid white;
+}
+.login {
+  display: none;
+  position: absolute;
+  left: 40%;
+  z-index: 2;
+  border: 3px solid white;
+  background-color: black;
+  width: 600px;
+  height: 500px;
+  border-radius: 5px;
+}
+.signup {
+  display: none;
+  position: absolute;
+  left: 40%;
+  z-index: 2;
+  border: 3px solid white;
+  background-color: black;
+  width: 600px;
+  height: 750px;
+  border-radius: 5px;
+}
+.loginsheet {
+  font-size: 30px;
+}
+.loginsheet input {
+  font-size: 30px;
+}
+.loginsheet button {
+  margin-left: 150px;
+  font-size: 30px;
+}
+.signupsheet {
+}
+.signupsheet button {
+  margin-left: 120px;
+  font-size: 30px;
+}
+.menu {
+  display: flex;
+  justify-content: center;
+  background-color: red;
+}
+.menu td {
+  font-size: 30px;
+  padding: 20px 70px 20px 70px;
+}
+.pages {
+  display: flex;
+  justify-content: center;
+}
+.firstpage {
+  display: flex;
+  justify-content: center;
+}
+.AP {
+  display: none;
+}
+.APhead table {
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+}
+.APhead th {
+  padding: 0px 100px 0px 100px;
+  background-color: white;
+  color: black;
+}
+.Prow {
+  display: flex;
+  justify-content: center;
+}
+.Prow td {
+  padding: 0px 100px 0px 100px;
+}
+.C1 {
+
+}
+.C2 {
+
+}
+.PH {
+  display: none;
+}
+.JF {
+  display: none;
+}
+.BR {
+  display: none;
+  background-color: white;
+  color: black;
+  width: 70%;
+  text-align: center;
+}
+.BR table {
+  display: inline-block;
+  font-size: 50px;
+  border: 5px solid black;
+}
+.BR th {
+  padding: 0px 100px 0px 100px;
+}
+.BR tr {
+}
+
+.RM {
+  display: none;
+}
+
+footer {
+  text-align: center;
+}
+
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 1;
+  display: none;
+}
