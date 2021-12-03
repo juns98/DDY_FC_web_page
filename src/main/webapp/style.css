@@ -1,7 +1,6 @@
 body {
   background-color: black;
   color: white;
-
 }
 li {
   list-style: none;
@@ -11,12 +10,12 @@ header {
   justify-content: center;
 }
 header h1{
-  font-size: 100px;
+  font-size: 70px;
   text-align: center;
-  padding: 0px 500px 0px 500px;
+  padding: 0px 300px 0px 400px;
 }
 header img {
-  height: 100px;
+  height: 70px;
 }
 header button {
   background-color: black;
@@ -27,6 +26,10 @@ header button {
   color: white;
   border: 5px solid white;
 }
+header button:hover {
+  background-color: white;
+  color: black;
+}
 .login {
   display: none;
   position: absolute;
@@ -34,36 +37,88 @@ header button {
   z-index: 2;
   border: 3px solid white;
   background-color: black;
-  width: 600px;
-  height: 500px;
   border-radius: 5px;
+  font-size: 20px;
 }
 .signup {
   display: none;
   position: absolute;
-  left: 40%;
+  left: 31%;
   z-index: 2;
   border: 3px solid white;
   background-color: black;
-  width: 600px;
-  height: 750px;
   border-radius: 5px;
+  font-size: 20px;
 }
 .loginsheet {
+  font-size: 20px;
+  padding: 10px 10px 10px 10px;
+}
+.loginsheet h1 {
   font-size: 30px;
+}
+.loginsheet table {
+
+}
+.exitlogin {
+  position: relative;
+  left: 220px;
 }
 .loginsheet input {
-  font-size: 30px;
+  font-size: 20px;
+  width: 250px;
 }
 .loginsheet button {
-  margin-left: 150px;
   font-size: 30px;
+  background-color: white;
+  color: black;
+}
+.loginbutton {
+  background-color: blue;
+  color: black;
+  border-radius: 10px;
+  padding: 5px 5px 5px 5px;
 }
 .signupsheet {
+  font-size: 20px;
+  padding: 10px 50px 10px 50px;
 }
-.signupsheet button {
-  margin-left: 120px;
+.exitsignup {
   font-size: 30px;
+  margin-left: 400px;
+}
+.exitsignup:hover {
+  color: white;
+  background-color: black;
+}
+.signupsheet input {
+  font-size: 20px;
+}
+.signupsheet input:focus {
+  border: 3px solid blue;
+}
+.signupbutton {
+  display: none;
+  background-color: blue;
+  color: white;
+  padding: 10px 10px 10px 10px;
+  margin-top: 20px;
+  border-radius: 10px;
+  font-size: 25px;
+}
+.signupbutton:hover {
+  background-color: white;
+  color: blue;
+}
+.checkinfo {
+	background-color: white;
+	color: black;
+	border-radius: 10px;
+	text-align: center;
+}
+.checkinfo:hover {
+	background-color: blue;
+	color: white;
 }
 .menu {
   display: flex;
@@ -72,21 +127,32 @@ header button {
 }
 .menu td {
   font-size: 30px;
-  padding: 20px 70px 20px 70px;
+  padding: 20px 30px 20px 30px;
+  border: 3px solid black;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px black;
+}
+.menu td:hover {
+  background-color: #B90000;
 }
 .pages {
   display: flex;
   justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 100px;
 }
 .firstpage {
   display: flex;
   justify-content: center;
 }
+.firstpage img {
+  margin-top: -20px;
+}
 .AP {
   display: none;
 }
 .APhead table {
-  font-size: 50px;
+  font-size: 30px;
   display: flex;
   justify-content: center;
 }
@@ -100,7 +166,7 @@ header button {
   justify-content: center;
 }
 .Prow td {
-  padding: 0px 100px 0px 100px;
+  padding: 0px 60px 0px 60px;
 }
 .C1 {
 
@@ -113,23 +179,79 @@ header button {
 }
 .JF {
   display: none;
+  background-color: #E1A963;
+  padding: 30px 50px 30px 50px;
+  border-radius: 50px;
 }
+.JF h1 {
+  font-size: 40px;
+}
+.JF h2 {
+  font-size: 25px;
+}
+.JF input {
+  width: 300px;
+  height: 40px;
+  font-size: 20px;
+}
+.JF input:focus {
+  border: 3px solid blue;
+}
+.JF textarea {
+  font-size: 20px;
+}
+.JF textarea:focus {
+  border: 3px solid blue;
+}
+.submitform {
+  margin-top: 20px;
+  font-size: 30px;
+  background-color: white;
+  border-radius: 10px;
+}
+.submitform:hover {
+  background-color: blue;
+  color: white;
+}
+.JF2 {
+  display: none;
+  text-align: center;
+}
+.JF2 h1 {
+  font-size: 50px;
+}
+.JF2 button {
+  font-size: 50px;
+  padding: 20px 20px 20px 20px;
+  border-radius: 20px;
+}
+.JF2 button:hover {
+  background-color: black;
+  color: white;
+}
+
 .BR {
   display: none;
   background-color: white;
   color: black;
-  width: 70%;
+  width: 60%;
   text-align: center;
+  border-radius: 30px;
 }
 .BR table {
   display: inline-block;
-  font-size: 50px;
+  font-size: 30px;
   border: 5px solid black;
+  margin-bottom: 100px;
 }
 .BR th {
-  padding: 0px 100px 0px 100px;
+  padding: 0px 50px 0px 50px;
+  border: 3px solid black;
 }
 .BR tr {
+}
+.BRtitle {
+  width: 400px;
 }
 
 .RM {
@@ -149,4 +271,112 @@ footer {
   background-color: rgba(0,0,0,0.3);
   z-index: 1;
   display: none;
+}
+
+.AT {
+  display: none;
+}
+.AT button {
+  font-size: 40px; background-color: white; color: blue; border-radius: 10px; padding: 10px 10px 10px 10px;
+}
+.AT button:hover {
+  background-color: blue;
+  color: white;
+}
+.AT h1 {
+  font-size: 35px;
+}
+.AT p {
+  font-size: 25px;
+  font-style: normal;
+}
+
+.PG {
+  text-align: center;
+  display: none;
+}
+.PG th {
+  font-size: 40px;
+  padding: 50px 100px 50px 100px;
+  background-color: white;
+  color: black;
+}
+.quiz {
+  display: none;
+  font-size: 40px;
+}
+.quiz button {
+  font-size: 30px;
+  padding: 20px 100px 20px 100px;
+  border-radius: 10px;
+}
+.quiz button:hover {
+  background-color: blue;
+  color: white;
+}
+.quizform {
+  display: none;
+  font-size: 30px;
+}
+.squad {
+  display: none;
+  font-size: 30px;
+}
+.squiz:hover {
+  color: white;
+  background-color: black;
+}
+.csquad:hover {
+  color: white;
+  background-color: black;
+}
+
+.PH {
+  background-color: black;
+  width: 1300px;
+}
+.PH h1 {
+  font-size: 50px;
+  text-align: center;
+}
+.photorow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr
+}
+.photorow img {
+  width: 300px;
+}
+.photocol1 {
+  grid-column: 1;
+}
+
+.MH {
+  display: none;
+  font-size: 30px;
+}
+.MH h1 {
+  text-align: center;
+}
+.MH table {
+  text-align: center;
+  background-color: gray;
+}
+.MH th {
+  padding: 0px 100px 0px 100px;
+  background-color: red;
+}
+.MH td {
+  padding: 0px 100px 0px 100px;
+}
+
+.RM {
+  text-align: center;
+  font-size: 30px;
+}
+.RM table {
+  background-color: green;
+}
+.RM th {
+  padding: 0px 100px 0px 100px;
+  background-color: blue;
 }
