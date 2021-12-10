@@ -5,12 +5,14 @@
 
 <%
 	request.setCharacterEncoding("UTF-8"); 
+	String id = "1";
 	String firstname = null; 
 	String lastname = null;
 	String birthday = null;
 	String gender = null;
 	String email = null;
 	String password = null;
+	
 	
 	if (request.getParameter("firstname") != null) { 
 		firstname = (String) request.getParameter("firstname"); 
@@ -35,17 +37,17 @@
 		PrintWriter script = response.getWriter(); 
 		script.println("<script>"); 
 		script.println("alert('Something is missing or went wrong. Going back to main page')"); 
-		script.println("location.href='index.jsp';");
+		script.println("location.href='loginsignup.jsp';");
 		script.println("</script>"); 
 		script.close(); 
 		return; 
 	}
 	else {
-		int result = new signup().toSQL(firstname, lastname, birthday, gender, email, password);
+		int result = new signup().toSQL(id, firstname, lastname, birthday, gender, email, password);
 		PrintWriter script = response.getWriter(); 
 		script.println("<script>"); 
 		script.println("alert('Successfully Signed up!')"); 
-		script.println("location.href='index.jsp';");
+		script.println("location.href='loginsignup.jsp';");
 		script.println("</script>"); 
 		script.close(); 
 	}

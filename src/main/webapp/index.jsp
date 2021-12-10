@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="jsp.player"%>
+<%@page import="jsp.board"%>
+<%@page import="jsp.matchhistory"%>
+<%@page import="jsp.futurematch"%>
 <%@page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
@@ -12,11 +15,9 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/south-street/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<title>Insert title here</title>
+
 </head>
 <body>
-
- 
     <header>
       <table>
         <tr>
@@ -28,65 +29,18 @@
             <h1 class="home">돌덩이 FC</h1>
           </td>
           <td>
-            <button class="loginopen" type="button" name="button">Login</button>
-            <button class="signupopen" type="button" name="button">Sign Up</button>
+            <p>Welcome! Logged in as
+            <%
+            String email = session.getAttribute("email").toString(); 
+            session.setAttribute("curemail", email);
+            %>
+            
+            <%= email %>
+            </p>
           </td>
         </tr>
       </table>
     </header>
-
-    <div class="login">
-      <div class="loginsheet">
-            <table>
-              <tr>
-                <td><h1>Login</h1></td>
-                <td><button class="exitlogin" type="button" name="button">X</button></td>
-              </tr>
-            </table>
-            <h1>Email</h1>
-            <input type="text" id="emaillogin" name="" value="" placeholder="Email">
-            <h1>Password</h1>
-            <input type="password" id="passwordlogin" name="" value="" placeholder="Password">
-            <button class="loginbutton" type="button" name="button">Login</button>
-        </div>
-    </div>
-
-    <div class="signup">
-      <form class="signupsheet" action="validate.jsp" method="post">
-        <table>
-          <tr>
-            <td><h1>Sign up</h1></td>
-            <td><button class="exitsignup" type="button" name="button">X</button></td>
-          </tr>
-        </table>
-        <h3>Fill in this form:</h3>
-        <h3>First name</h3>
-        <input type="text" id="firstname" name="firstname" value="" placeholder="First name">
-        <h3>Last name</h3>
-        <input type="text" id="lastname" name="lastname" value="" placeholder="Last name">
-        <h3>Birthday</h3>
-        <input class="birth" type="date" name="birthday" value="">
-        <table>
-          <td class="gender">
-            <input id="male" class="radiobutton" type="radio" name="gender" value="male">
-            <label for="male">Male</label>
-          </td>
-          <td class="gender">
-            <input id="female" class="radiobutton" type="radio" name="gender" value="female">
-            <label for="female">Female</label>
-          </td>
-        </table>
-        <h3>Email</h3>
-        <input type="text" id="emailsignup" name="email" value="" placeholder="Email">
-        <h3>Password</h3>
-        <h4>At least 6 letters containing one capital letter, one special letter</h4>
-        <input type="password" id="passwordsignup" name="password" value="" placeholder="Password">
-        <h3>Confirm password</h3>
-        <input type="password" id="confirmpassword" name="" value="" placeholder="Confirm password"><br>
-        <h3 class="checkinfo">Check your information</h3>
-        <input class="signupbutton" type="submit" value="Sign up">
-      </form>
-    </div>
 
     <div class="menu">
       <table>
@@ -138,26 +92,72 @@
         <div class="Prow">
           <table>
           <%
-			 player players = new player();
-			 List playerlist=players.doPost();
-		
-			for(int i=0;i<playerlist.size();i+=4){
-		   		List player1=(List)playerlist.get(i);
-		   		List player2=(List)playerlist.get(i+1);
-		   		List player3=(List)playerlist.get(i+2);
-		   		List player4=(List)playerlist.get(i+3);
- 			%>
+			player players = new player();
+			List playerlist=players.doPost();
+        	List forwards=new ArrayList();
+        	List midfielders=new ArrayList();
+        	List defenders=new ArrayList();
+        	List goalkeepers=new ArrayList();
+        	List temp = new ArrayList();
+        	System.out.println(playerlist);
+        	int f = 0, m = 0, d = 0, g = 0;
+        	
+        	for (int i = 0; i<playerlist.size(); i++) {
+        		temp = (List)playerlist.get(i);
+        		System.out.println(temp.get(4));
+        		if (temp.get(4).toString().equals("FW")) {
+        			forwards.add(temp);
+        			f += 1;
+        		}
+        		else if (temp.get(4).toString().equals("MF")) {
+        			midfielders.add(temp);
+        			m+=1;
+        		}
+        		else if (temp.get(4).toString().equals("DF")) {
+        			defenders.add(temp);
+        			d+=1;
+        		}
+        		else if (temp.get(4).toString().equals("GK")) {
+        			goalkeepers.add(temp);
+        			g+=1;
+        		}
+        	}
+        	int check = 0;
+        	System.out.println(f);
+        	
+        	for (int i=0; i<forwards.size(); i+=4) {
+        		if (check == 0 && forwards.size() - i < 4) {
+        			int adds = 4- forwards.size()-i;
+        			List array = new ArrayList();
+        			for (int j = 0; j<4; j++) {
+        				if (j == 2) {
+        					array.add(" ");
+        				}
+        				else {
+        					array.add("Nobody");
+        				}
+        			}
+        			for (int j = 0; j < adds; j++) {
+        				forwards.add(array);
+        			}
+        			check = 1;
+        		}
+        		List player1=(List)forwards.get(i);
+    		   	List player2=(List)forwards.get(i+1);
+    		   	List player3=(List)forwards.get(i+2);
+    		   	List player4=(List)forwards.get(i+3);
+ 			%> 			
             <tr>
-              <td class="C1">
-                <div class="C1">
+              <td class="F1">
+                <div class="F1">
                   <img src="assets/basic.jpeg" alt="">
                   <h1>Name: <%=player1.get(1) %><%=player1.get(2) %></h1>
                   <h1>Age: <%=player1.get(3) %></h1>
                   <h1>Number: <%=player1.get(0) %></h1>
                 </div>
               </td>
-              <td class="C2">
-                <div class="C2">
+              <td class="F2">
+                <div class="F2">
                   <img src="assets/basic.jpeg" alt="">
                   <h1>Name: <%=player2.get(1) %><%=player2.get(2) %></h1>
                   <h1>Age: <%=player2.get(3) %></h1>
@@ -165,7 +165,7 @@
                 </div>
               </td>
               <td>
-                <div class="C3">
+                <div class="F3">
                   <img src="assets/basic.jpeg" alt="">
                    <h1>Name: <%=player3.get(1) %><%=player3.get(2) %></h1>
                   <h1>Age: <%=player3.get(3) %></h1>
@@ -173,7 +173,7 @@
                 </div>
               </td>
               <td>
-                <div class="C4">
+                <div class="F4">
                   <img src="assets/basic.jpeg" alt="">
                   <h1>Name: <%=player4.get(1) %><%=player4.get(2) %></h1>
                   <h1>Age: <%=player4.get(3) %></h1>
@@ -181,9 +181,205 @@
                 </div>
               </td>
             </tr>
+            
             <% 
-				} 
+			} 
 			%>
+			
+			<%
+			check = 0;
+			System.out.println(m);
+			for (int i=0; i<midfielders.size(); i+=4) {
+        		if (check == 0 && midfielders.size() - i < 4) {
+        			int adds = 4- midfielders.size()-i;
+        			List array = new ArrayList();
+        			for (int j = 0; j<4; j++) {
+        				if (j == 2) {
+        					array.add(" ");
+        				}
+        				else {
+        					array.add("Nobody");
+        				}
+        			}
+        			for (int j = 0; j < adds; j++) {
+        				midfielders.add(array);
+        			}
+        			check = 1;
+        		}
+        		List player1=(List)midfielders.get(i);
+    		   	List player2=(List)midfielders.get(i+1);
+    		   	List player3=(List)midfielders.get(i+2);
+    		   	List player4=(List)midfielders.get(i+3);
+ 			%> 			
+            <tr>
+              <td class="M1">
+                <div class="M1">
+                  <img src="assets/basic.jpeg" alt="">
+                  <h1>Name: <%=player1.get(1) %><%=player1.get(2) %></h1>
+                  <h1>Age: <%=player1.get(3) %></h1>
+                  <h1>Number: <%=player1.get(0) %></h1>
+                </div>
+              </td>
+              <td class="M2">
+                <div class="M2">
+                  <img src="assets/basic.jpeg" alt="">
+                  <h1>Name: <%=player2.get(1) %><%=player2.get(2) %></h1>
+                  <h1>Age: <%=player2.get(3) %></h1>
+                  <h1>Number: <%=player2.get(0) %></h1>
+                </div>
+              </td>
+              <td>
+                <div class="M3">
+                  <img src="assets/basic.jpeg" alt="">
+                   <h1>Name: <%=player3.get(1) %><%=player3.get(2) %></h1>
+                  <h1>Age: <%=player3.get(3) %></h1>
+                  <h1>Number: <%=player3.get(0) %></h1>
+                </div>
+              </td>
+              <td>
+                <div class="M4">
+                  <img src="assets/basic.jpeg" alt="">
+                  <h1>Name: <%=player4.get(1) %><%=player4.get(2) %></h1>
+                  <h1>Age: <%=player4.get(3) %></h1>
+                  <h1>Number: <%=player4.get(0) %></h1>
+                </div>
+              </td>
+            </tr>
+            
+            <% 
+			} 
+			%>
+			
+			
+			<%
+			check = 0;
+			System.out.println(d);
+			for (int i=0; i<defenders.size(); i+=4) {
+        		if (check == 0 && defenders.size() - i < 4) {
+        			int adds = 4- defenders.size()-i;
+        			List array = new ArrayList();
+        			for (int j = 0; j<4; j++) {
+        				if (j == 2) {
+        					array.add(" ");
+        				}
+        				else {
+        					array.add("Nobody");
+        				}
+        			}
+        			for (int j = 0; j < adds; j++) {
+        				defenders.add(array);
+        			}
+        			check = 1;
+        		}
+        		List player1=(List)defenders.get(i);
+    		   	List player2=(List)defenders.get(i+1);
+    		   	List player3=(List)defenders.get(i+2);
+    		   	List player4=(List)defenders.get(i+3);
+ 			%> 			
+            <tr>
+              <td class="D1">
+                <div class="D1">
+                  <img src="assets/basic.jpeg" alt="">
+                  <h1>Name: <%=player1.get(1) %><%=player1.get(2) %></h1>
+                  <h1>Age: <%=player1.get(3) %></h1>
+                  <h1>Number: <%=player1.get(0) %></h1>
+                </div>
+              </td>
+              <td class="D2">
+                <div class="D2">
+                  <img src="assets/basic.jpeg" alt="">
+                  <h1>Name: <%=player2.get(1) %><%=player2.get(2) %></h1>
+                  <h1>Age: <%=player2.get(3) %></h1>
+                  <h1>Number: <%=player2.get(0) %></h1>
+                </div>
+              </td>
+              <td>
+                <div class="D3">
+                  <img src="assets/basic.jpeg" alt="">
+                   <h1>Name: <%=player3.get(1) %><%=player3.get(2) %></h1>
+                  <h1>Age: <%=player3.get(3) %></h1>
+                  <h1>Number: <%=player3.get(0) %></h1>
+                </div>
+              </td>
+              <td>
+                <div class="D4">
+                  <img src="assets/basic.jpeg" alt="">
+                  <h1>Name: <%=player4.get(1) %><%=player4.get(2) %></h1>
+                  <h1>Age: <%=player4.get(3) %></h1>
+                  <h1>Number: <%=player4.get(0) %></h1>
+                </div>
+              </td>
+            </tr>
+            
+            <% 
+			} 
+			%>
+			
+			
+			<%
+			check = 0;
+			System.out.println(g);
+			for (int i=0; i<goalkeepers.size(); i+=4) {
+        		if (check == 0 && goalkeepers.size() - i < 4) {
+        			int adds = 4- goalkeepers.size()-i;
+        			List array = new ArrayList();
+        			for (int j = 0; j<4; j++) {
+        				if (j == 2) {
+        					array.add(" ");
+        				}
+        				else {
+        					array.add("Nobody");
+        				}
+        			}
+        			for (int j = 0; j < adds; j++) {
+        				goalkeepers.add(array);
+        			}
+        			check = 1;
+        		}
+        		List player1=(List)goalkeepers.get(i);
+    		   	List player2=(List)goalkeepers.get(i+1);
+    		   	List player3=(List)goalkeepers.get(i+2);
+    		   	List player4=(List)goalkeepers.get(i+3);
+ 			%> 			
+            <tr>
+              <td class="G1">
+                <div class="G1">
+                  <img src="assets/basic.jpeg" alt="">
+                  <h1>Name: <%=player1.get(1) %><%=player1.get(2) %></h1>
+                  <h1>Age: <%=player1.get(3) %></h1>
+                  <h1>Number: <%=player1.get(0) %></h1>
+                </div>
+              </td>
+              <td class="G2">
+                <div class="G2">
+                  <img src="assets/basic.jpeg" alt="">
+                  <h1>Name: <%=player2.get(1) %><%=player2.get(2) %></h1>
+                  <h1>Age: <%=player2.get(3) %></h1>
+                  <h1>Number: <%=player2.get(0) %></h1>
+                </div>
+              </td>
+              <td>
+                <div class="G3">
+                  <img src="assets/basic.jpeg" alt="">
+                   <h1>Name: <%=player3.get(1) %><%=player3.get(2) %></h1>
+                  <h1>Age: <%=player3.get(3) %></h1>
+                  <h1>Number: <%=player3.get(0) %></h1>
+                </div>
+              </td>
+              <td>
+                <div class="G4">
+                  <img src="assets/basic.jpeg" alt="">
+                  <h1>Name: <%=player4.get(1) %><%=player4.get(2) %></h1>
+                  <h1>Age: <%=player4.get(3) %></h1>
+                  <h1>Number: <%=player4.get(0) %></h1>
+                </div>
+              </td>
+            </tr>
+            
+            <% 
+			} 
+			%>
+			
           </table>
         </div>
       </div>
@@ -193,22 +389,45 @@
         <h1>Match History</h1>
         <table>
           <tr>
+          	<th>NO</th>
             <th>Against</th>
             <th>Score</th>
             <th>Result</th>
           </tr>
+          <%
+          matchhistory matches = new matchhistory();
+          List matchlist = matches.showlist();
+          int win = 0, draw = 0, lose = 0;
+          for (int i = 0; i<matchlist.size(); i++) {
+        	List tempmatch = (List)matchlist.get(i);  
+        	if (tempmatch.get(3).toString().equals("win")) {
+        		win += 1;
+        	}
+        	else if (tempmatch.get(3).toString().equals("draw")) {
+        		draw += 1;
+        	}
+        	else if (tempmatch.get(3).toString().equals("lose")) {
+        		lose += 1;
+        	}
+        	 			
+          %>
           <tr>
-            <td>Cruise FC</td>
-            <td>1: 6</td>
-            <td>Lose</td>
+            <td><%=tempmatch.get(0) %></td>
+            <td><%=tempmatch.get(1) %></td>
+            <td><%=tempmatch.get(2) %></td>
+            <td><%=tempmatch.get(3) %></td>
           </tr>
+          <%
+          }
+          %>
         </table>
         <h1>Statistics</h1>
         <table>
           <tr>
-            <td>Wins: 0</td>
-            <td>Ties: 0</td>
-            <td>Lost: 1</td>
+          	<td>Total: <%=win+draw+lose%></td>
+            <td>Wins: <%=win%></td>
+            <td>Ties: <%=draw%></td>
+            <td>Lost: <%=lose%></td>
           </tr>
         </table>
       </div>
@@ -269,29 +488,60 @@
         <h2>We will Email you as soon as possible</h2>
         <button class="jointomain" type="button" name="button">Go back to main</button>
       </div>
-
+	<%
+	board boards = new board();
+    List boardlist = boards.showlist();
+    
+	%>
       <div class="BR">
-        <h1 style="font-size: 50px;">Boards</h1>
-        <table>
-          <tr>
-            <th class="BRnum">Number</th>
-            <th class="BRtitle">Title</th>
-            <th class="BRID">ID</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>hello</td>
-            <td>temp</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>hello2</td>
-            <td>temp2</td>
-          </tr>
-        </table>
-
-
+      	<div class="board">
+      		<h1 style="font-size: 50px;">Boards</h1>
+	        <table>
+	          <tr>
+	            <th class="BRnum">Number</th>
+	            <th class="BRtitle">Title</th>
+	            <th class="BRID">ID</th>
+	          </tr>
+	          <%
+	          for (int i = 0; i<boardlist.size(); i++) {
+	        	  List tempboard = (List)boardlist.get(i);
+	          
+	          %>
+	          <tr>
+	            <td><%=tempboard.get(0) %></td>
+	            <td><%=tempboard.get(1) %></td>
+	            <td><%=tempboard.get(2) %></td>
+	          </tr>
+	          <%
+	          }
+	          %>
+	         
+	        </table>
+			<button class="Addbutton">Add</button>
+      	</div>
+       	<div class="BW">
+	      	<h1>Submit anything you want!</h1>
+	      	<div id="write_area">
+	      		<form class="submitboard" action="board.jsp" method="post">
+	      			<table>
+	      				<tr>
+	      					<td>
+	      					<input type="text" class="title" placeholder="Write title here" name="title">
+	      					</td>
+	      				</tr>
+	      				<tr>
+	      					<td>
+	      					<textarea class="boardcontent" placeholder="Write here" name="boardcontent"></textarea>
+	      					</td>
+	      				</tr>
+	      			</table>
+	      			<button class="submitboardbuttton" type="submit">Submit</button>
+	      		</form>
+	      	</div>
+      	</div>
       </div>
+      
+
 
       <div class="RM">
         <h1>Future Matches</h1>
@@ -302,11 +552,22 @@
             <th>Opponent</th>
             <th>Location</th>
           </tr>
+          <%
+          futurematch futurematch = new futurematch();
+          List futurematchlist = futurematch.showlist();
+          
+          for (int i = 0; i<futurematchlist.size(); i++) {
+        	List tempfml = (List)futurematchlist.get(i);
+          
+          %>
           <tr>
-            <td>2021/12/19</td>
-            <td>Tree FC</td>
-            <td>Seoul</td>
+            <td><%=tempfml.get(0) %></td>
+            <td><%=tempfml.get(1) %></td>
+            <td><%=tempfml.get(2) %></td>
           </tr>
+          <%
+          } 
+          %>
         </table>
       </div>
 
