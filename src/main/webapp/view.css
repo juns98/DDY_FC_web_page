@@ -1,0 +1,38 @@
+.maintable {
+	display: flex;
+	justify-content: center;
+}
+table {
+	width: 500px;
+	margin-top: 50px;
+	font-size: 30px;
+	border: 5px solid white;
+}
+td {
+	border: 3px solid white;
+}
+body {
+	background-color: black;
+	color: white;
+}
+
+.viewfunction {
+	display: flex;
+	justify-content:center;
+	margin-top: 50px;
+}
+
+.viewfunction a {
+	background-color: white;
+	color: black;
+	font-size: 30px;
+	margin-left: 50px;
+	padding: 10px 10px 10px 10px;
+	border-radius: 10px;
+	border: 3px solid white;
+	text-decoration: none;
+}
+a:hover {
+	color: white;
+	background-color: blue;
+}

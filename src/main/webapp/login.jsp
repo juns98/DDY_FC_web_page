@@ -36,7 +36,7 @@
 				script.println("alert('login success!')"); 
 				script.println("location.href='index.jsp';");
 				script.println("</script>"); 
-			} else if (result == 0) {
+			} else {
 				PrintWriter script = response.getWriter(); 
 				script.println("<script>"); 
 				script.println("alert('Wrong password. Try again')"); 

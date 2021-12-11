@@ -115,30 +115,57 @@ $(document).ready(function() {
     prevpage = ".JF";
   })
 
+//function for about players
   $(".AboutPlayer").click(function() {
     $(prevpage).css("display","none");
     $(".AP").css("display", "block");
     prevpage =".AP";
   })
+	$(".forward").click(function() {
+		$(".F").css("display", "block");
+		$(".M").css("display", "none");
+		$(".D").css("display", "none");
+		$(".G").css("display", "none");
+	})
+	$(".midfielder").click(function() {
+		$(".F").css("display", "none");
+		$(".M").css("display", "block");
+		$(".D").css("display", "none");
+		$(".G").css("display", "none");
+	})
+	$(".defender").click(function() {
+		$(".F").css("display", "none");
+		$(".M").css("display", "none");
+		$(".D").css("display", "block");
+		$(".G").css("display", "none");
+	})
+	$(".goalkeeper").click(function() {
+		$(".F").css("display", "none");
+		$(".M").css("display", "none");
+		$(".D").css("display", "none");
+		$(".G").css("display", "block");
+	})
 
+//function about match history
   $(".MatchHistory").click(function() {
     $(prevpage).css("display","none");
     $(".MH").css("display", "block");
     prevpage = ".MH";
   })
 
+//function about photos
   $(".Photos").click(function() {
     $(prevpage).css("display","none");
     $(".PH").css("display", "block");
     prevpage = ".PH";
   })
 
+//function about joining forms
   $(".JoinForm").click(function() {
     $(prevpage).css("display","none");
     $(".JF").css("display", "block");
     prevpage = ".JF";
   })
-
   $(".submitform").click(function() {
     if ($(".name").val() == "") {
       alert("Please fill in your name");
@@ -161,24 +188,42 @@ $(document).ready(function() {
       prevpage = ".JF2";
     }
   })
-
   $(".jointomain").click(function() {
     $(prevpage).css("display","none");
     $(".firstpage").css("display", "block");
     prevpage = ".firstpage";
   })
 
+//function about boards
   $(".Boards").click(function() {
     $(prevpage).css("display","none");
     $(".BR").css("display", "block");
     prevpage = ".BR";
   })
+	$(".Addbutton").click(function() {
+		$(prevpage).css("display", "none");
+		$(".BW").css("display", "block");
+		prevpage =".BW";
+	})
+	$(".gobackboardbutton").click(function() {
+		$(prevpage).css("display", "none");
+		$(".BR").css("display", "block");
+		prevpage = ".BR";
+	})
 
+
+//function about reserving match
   $(".Reservation").click(function() {
     $(prevpage).css("display","none");
     $(".RM").css("display", "block");
     prevpage = ".RM";
   })
+$(".reservematchbutton").click(function() {
+	alert('Successfully reserved for matches');
+	$(prevpage).css("display", "none");
+	$(".firstpage").css("display", "block");
+	prevpage=".firstpage";
+})
 
 //function related to playground
   $(".Playground").click(function() {

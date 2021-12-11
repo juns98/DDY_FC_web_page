@@ -3,6 +3,8 @@
 <%@page import="jsp.board"%>
 <%@page import="jsp.matchhistory"%>
 <%@page import="jsp.futurematch"%>
+<%@page import="jsp.quiz"%>
+
 <%@page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
@@ -22,8 +24,8 @@
       <table>
         <tr>
           <td>
-            <img src="assets/instagram.png" alt="">
-            <img src="assets/유튜브.png" alt="">
+            <img src="assets/instagram.png" alt="" onclick="location.href='https://www.instagram.com/fc_doldeongyee/';" style="cursor:pointer;">
+            <img src="assets/유튜브.png" alt="" onclick="location.href='https://www.youtube.com/channel/UCqbkqP7q_y8_q0LNYVL-K_A';" style="cursor:pointer;">
           </td>
           <td>
             <h1 class="home">돌덩이 FC</h1>
@@ -82,10 +84,10 @@
         <div class="APhead">
           <table>
             <tr>
-              <th>Forward</th>
-              <th>Midfielder</th>
-              <th>Defender</th>
-              <th>GoalKeeper</th>
+              <th class="forward">Forward</th>
+              <th class="midfielder">Midfielder</th>
+              <th class="defender">Defender</th>
+              <th class="goalkeeper">GoalKeeper</th>
             </tr>
           </table>
         </div>
@@ -147,7 +149,7 @@
     		   	List player3=(List)forwards.get(i+2);
     		   	List player4=(List)forwards.get(i+3);
  			%> 			
-            <tr>
+            <tr class="F">
               <td class="F1">
                 <div class="F1">
                   <img src="assets/basic.jpeg" alt="">
@@ -211,7 +213,7 @@
     		   	List player3=(List)midfielders.get(i+2);
     		   	List player4=(List)midfielders.get(i+3);
  			%> 			
-            <tr>
+            <tr class="M">
               <td class="M1">
                 <div class="M1">
                   <img src="assets/basic.jpeg" alt="">
@@ -276,7 +278,7 @@
     		   	List player3=(List)defenders.get(i+2);
     		   	List player4=(List)defenders.get(i+3);
  			%> 			
-            <tr>
+            <tr class="D">
               <td class="D1">
                 <div class="D1">
                   <img src="assets/basic.jpeg" alt="">
@@ -341,7 +343,7 @@
     		   	List player3=(List)goalkeepers.get(i+2);
     		   	List player4=(List)goalkeepers.get(i+3);
  			%> 			
-            <tr>
+            <tr class="G">
               <td class="G1">
                 <div class="G1">
                   <img src="assets/basic.jpeg" alt="">
@@ -470,23 +472,26 @@
       </div>
 
       <div class="JF">
-        <h1>Join our team!</h1>
+      <form class="joinform" method="post" action="join.jsp">
+      	<h1>Join our team!</h1>
         <h2>Name:</h2>
-        <input class="name" type="text" name="" value="">
+        <input class="name" type="text" name="name" value="">
         <h2>Age:</h2>
-        <input class="age" type="text" name="" value="">
+        <input class="age" type="text" name="age" value="">
         <h2>Position:</h2>
-        <input class="position" type="text" name="" value="">
+        <input class="position" type="text" name="position" value="">
         <h2>Email:</h2>
-        <input class="email" type="text" name="" value="">
+        <input class="email" type="text" name="email" value="">
         <h2>About Yourself:</h2>
-        <textarea class="selfintroduce" name="name" rows="8" cols="30"></textarea><br>
-        <button class="submitform" type="button" name="button">Submit</button>
+        <textarea class="selfintroduce" name="introduction" rows="8" cols="30"></textarea><br>
+        <button class="submitform" type="submit" name="button">Submit</button>
+      </form>
+        
       </div>
       <div class="JF2">
         <h1>Thank you for Applying!</h1>
         <h2>We will Email you as soon as possible</h2>
-        <button class="jointomain" type="button" name="button">Go back to main</button>
+        <button class="jointomain" type="submit" name="button">Go back to main</button>
       </div>
 	<%
 	board boards = new board();
@@ -496,29 +501,32 @@
       <div class="BR">
       	<div class="board">
       		<h1 style="font-size: 50px;">Boards</h1>
-	        <table>
+	        <table class="boardlisttable">
 	          <tr>
 	            <th class="BRnum">Number</th>
 	            <th class="BRtitle">Title</th>
 	            <th class="BRID">ID</th>
+	            <th class="BRview">Click to View</th>
 	          </tr>
 	          <%
 	          for (int i = 0; i<boardlist.size(); i++) {
 	        	  List tempboard = (List)boardlist.get(i);
-	          
 	          %>
-	          <tr>
+	          <tr class="boardcomponent">
 	            <td><%=tempboard.get(0) %></td>
 	            <td><%=tempboard.get(1) %></td>
 	            <td><%=tempboard.get(2) %></td>
+	            <td><a href="view.jsp?ID=<%=tempboard.get(0)%>" class="viewcontent">View</a></td>
 	          </tr>
 	          <%
 	          }
 	          %>
 	         
-	        </table>
-			<button class="Addbutton">Add</button>
+	        </table>    
+		<button class="Addbutton">Add new</button>
       	</div>
+      </div>
+      	
        	<div class="BW">
 	      	<h1>Submit anything you want!</h1>
 	      	<div id="write_area">
@@ -526,31 +534,38 @@
 	      			<table>
 	      				<tr>
 	      					<td>
+	      					<h2>Title</h2>
+	      					</td>
+	      					<td>
 	      					<input type="text" class="title" placeholder="Write title here" name="title">
 	      					</td>
 	      				</tr>
 	      				<tr>
 	      					<td>
+	      					<h2>Content</h2>
+	      					</td>
+	      					<td>
 	      					<textarea class="boardcontent" placeholder="Write here" name="boardcontent"></textarea>
 	      					</td>
 	      				</tr>
 	      			</table>
-	      			<button class="submitboardbuttton" type="submit">Submit</button>
+	      			<button class="submitboardbutton" type="submit">Submit</button>
+	      			<button class="gobackboardbutton" type="button">back</button>
 	      		</form>
 	      	</div>
       	</div>
-      </div>
       
-
 
       <div class="RM">
         <h1>Future Matches</h1>
         <h2>Choose a match that you can play</h2>
+        <form class="reservematchform" method="post">
         <table>
           <tr>
             <th>Date</th>
             <th>Opponent</th>
             <th>Location</th>
+            <th>Check</th>
           </tr>
           <%
           futurematch futurematch = new futurematch();
@@ -560,15 +575,18 @@
         	List tempfml = (List)futurematchlist.get(i);
           
           %>
-          <tr>
+          <tr class="reservematchlist">
             <td><%=tempfml.get(0) %></td>
             <td><%=tempfml.get(1) %></td>
             <td><%=tempfml.get(2) %></td>
+            <td><input type="checkbox" style="zoom:2.0"></td>
           </tr>
           <%
           } 
           %>
         </table>
+        </form>
+        <button class="reservematchbutton">Reserve Chosen Matches</button>
       </div>
 
       <div class="PG">
@@ -583,16 +601,9 @@
         </div>
         <div class="quiz">
           <h1>Are you ready to Start?</h1>
-          <button class="startQuiz" type="button" name="button">Start!</button>
+          <a href="quiz.jsp?ID=1" class="startQuiz" type="button" name="button">Start!</a>
         </div>
-        <div class="quizform">
-          <h1 class="quiznum"></h1>
-          <h1>Q1. What is your age?</h1>
-          <h2>1. 10</h2>
-          <h2>2. 20</h2>
-          <h2>3. 30</h2>
-          <h2>4. 30</h2>
-        </div>
+        
         <div class="squad">
           <h1>Not serviced yet</h1>
         </div>
